@@ -365,7 +365,6 @@ export default function Home() {
       </section>
 
       {/* JivoChat */}
-      <script src="//code.jivosite.com/widget/LnSN2EdEfk" async />
     </div>
   )
 }
