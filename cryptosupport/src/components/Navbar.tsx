@@ -90,18 +90,20 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex">
-            <button
-              onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+            <a
+              href={`https://wa.me/18632100688?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '6px',
                 padding: '10px 22px', borderRadius: '100px',
                 background: 'white', border: 'none',
-                color: '#0a0814', cursor: 'pointer',
+                color: '#0a0814', textDecoration: 'none', cursor: 'pointer',
                 fontFamily: 'Sora', fontWeight: 700, fontSize: '13px',
                 whiteSpace: 'nowrap' as const,
               }}>
               Start Live Chat
-            </button>
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -135,17 +137,20 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          <button
-            onClick={() => { setOpen(false); if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+          <a
+            href={`https://wa.me/18632100688?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
             style={{
               width: '100%', padding: '16px', borderRadius: '100px',
               background: 'white', border: 'none',
-              color: '#0a0814', cursor: 'pointer',
+              color: '#0a0814', cursor: 'pointer', textDecoration: 'none',
               fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
-              marginTop: '24px',
+              marginTop: '24px', display: 'block', textAlign: 'center' as const,
             }}>
             Start Live Chat
-          </button>
+          </a>
         </div>
       </div>
     </>
