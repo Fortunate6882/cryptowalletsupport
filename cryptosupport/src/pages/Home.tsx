@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight, ChevronDown, ChevronUp,
+  ArrowRight, ChevronDown, ChevronUp, Search,
   Shield, BookOpen, MessageCircle, AlertTriangle,
   CheckCircle, Clock, XCircle, ArrowUpRight, Send, Lock, Zap, Globe
 } from 'lucide-react'
@@ -52,7 +52,7 @@ export default function Home() {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         position: 'relative', overflow: 'hidden',
         paddingTop: '130px', paddingBottom: '100px',
-        background: '#080612',
+        background: 'linear-gradient(160deg, #1a0f6e 0%, #2d1b8e 35%, #4b2fbe 65%, #7c3aed 100%)',
       }}>
         {/* Purple glow */}
         <div style={{
@@ -177,7 +177,7 @@ export default function Home() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {[
-              { step: '01', icon: <Search size={28} style={{ color: '#8B5CF6' }} />, title: 'Search your problem', desc: 'Type what\'s happening — pending withdrawal, failed transaction, wrong network — and find your answer instantly.' },
+              { step: '01', icon: <Search size={28} style={{ color: '#8B5CF6' }} />, title: 'Describe your issue', desc: 'Tell us what\'s happening — pending withdrawal, failed transaction, wrong network. The more detail, the faster we help.' },
               { step: '02', icon: <BookOpen size={28} style={{ color: '#8B5CF6' }} />, title: 'Follow the guide', desc: 'Step-by-step instructions written by crypto experts. Clear, direct, and built for every experience level.' },
               { step: '03', icon: <MessageCircle size={28} style={{ color: '#8B5CF6' }} />, title: 'Chat if you\'re stuck', desc: 'Still need help? Our live support team is online 24/7. Real people, real answers, no bots.' },
             ].map(({ step, icon, title, desc }, i) => (
@@ -242,7 +242,7 @@ export default function Home() {
             ].map(({ icon, color, title, desc }) => (
               <div key={title} style={{
                 padding: '40px 36px',
-                background: '#0D0C1A',
+                background: '#0f0b2e',
                 border: '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '20px',
                 position: 'relative' as const, overflow: 'hidden',
@@ -349,7 +349,7 @@ export default function Home() {
               <Link key={issue.slug} to={`/issues/${issue.slug}`} style={{
                 display: 'flex', alignItems: 'center', gap: '16px',
                 padding: '22px 24px',
-                background: '#0D0C1A',
+                background: '#0f0b2e',
                 border: '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '14px', textDecoration: 'none',
                 transition: 'border-color 0.2s',
