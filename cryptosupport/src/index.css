@@ -194,13 +194,13 @@ code, pre {
   animation: scrollLeft 30s linear infinite;
 }
 
-.accordion-item { border-bottom: 1px solid var(--border); }
+.accordion-item { border-bottom: 1px solid rgba(10,8,20,0.10); }
 
 .accordion-btn {
   width: 100%;
   background: none;
   border: none;
-  color: var(--text);
+  color: #0a0814;
   padding: 20px 0;
   display: flex;
   align-items: center;
@@ -213,10 +213,10 @@ code, pre {
   transition: color 0.2s;
 }
 
-.accordion-btn:hover { color: var(--blue2); }
+.accordion-btn:hover { color: #8B5CF6; }
 
 .accordion-content {
-  color: var(--muted);
+  color: rgba(10,8,20,0.55);
   font-size: 15px;
   line-height: 1.75;
   padding-bottom: 20px;
