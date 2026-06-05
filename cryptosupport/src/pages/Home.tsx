@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronDown, ChevronUp, Search, Shield, BookOpen, MessageCircle, AlertTriangle, CheckCircle, Clock, XCircle, ArrowUpRight, Send } from 'lucide-react'
+import {
+  ArrowRight, ChevronDown, ChevronUp, Search, Shield,
+  BookOpen, MessageCircle, AlertTriangle, CheckCircle,
+  Clock, XCircle, ArrowUpRight, Send, Lock, Zap, Globe
+} from 'lucide-react'
 import { articles, issues, faqs } from '../data/content'
 
-// FAQ Accordion
 function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
   return (
@@ -61,8 +64,11 @@ export default function Home() {
   }
 
   return (
-    <div>
-      {/* ── HERO ── */}
+    <div style={{ background: '#06050A' }}>
+
+      {/* ══════════════════════════════════
+          HERO
+      ══════════════════════════════════ */}
       <section style={{
         minHeight: '100vh',
         display: 'flex',
@@ -70,91 +76,162 @@ export default function Home() {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        paddingTop: '108px',
-        paddingBottom: '80px',
-        background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,142,247,0.12) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 100%, rgba(139,92,246,0.08) 0%, transparent 70%), #06050A',
+        paddingTop: '120px',
+        paddingBottom: '100px',
       }}>
-        {/* Subtle dot grid */}
+        {/* Deep atmospheric background */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(160deg, #0d0b1a 0%, #06050A 40%, #080614 100%)',
+        }} />
+        {/* Purple glow top left */}
+        <div style={{
+          position: 'absolute', top: '-10%', left: '-5%',
+          width: '600px', height: '600px', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }} />
+        {/* Blue glow bottom right */}
+        <div style={{
+          position: 'absolute', bottom: '-10%', right: '-5%',
+          width: '500px', height: '500px', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(79,142,247,0.14) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }} />
+        {/* Subtle grid */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
-          backgroundImage: 'radial-gradient(rgba(79,142,247,0.15) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-          opacity: 0.4,
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
         }} />
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto w-full">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full"
-            style={{ background: 'rgba(79,142,247,0.08)', border: '1px solid rgba(79,142,247,0.2)' }}>
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22C55E', display: 'inline-block' }} className="animate-pulse-slow" />
-            <span className="font-body font-semibold text-sm" style={{ color: 'rgba(240,239,248,0.7)' }}>
+        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 24px', maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+
+          {/* Trust badge */}
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            marginBottom: '40px', padding: '8px 18px', borderRadius: '100px',
+            background: 'rgba(255,255,255,0.04)',
+            border: '1px solid rgba(255,255,255,0.10)',
+          }}>
+            <Lock size={13} style={{ color: '#4F8EF7' }} />
+            <span style={{ fontFamily: 'DM Sans', fontSize: '13px', fontWeight: 500, color: 'rgba(240,239,248,0.60)' }}>
               Trusted crypto guidance — available 24/7
             </span>
           </div>
 
-          {/* Headline */}
-          <h1 className="font-heading font-bold mb-6" style={{ fontSize: 'clamp(42px, 8vw, 80px)', letterSpacing: '-2px', lineHeight: 0.95, color: '#F0EFF8' }}>
+          {/* Main headline */}
+          <h1 style={{
+            fontFamily: 'Sora', fontWeight: 800,
+            fontSize: 'clamp(48px, 9vw, 96px)',
+            letterSpacing: '-3px', lineHeight: 0.95,
+            color: '#F0EFF8', marginBottom: '28px',
+          }}>
             The Blockchain<br />
-            <span className="gradient-text-blue">Never Sleeps.</span>
+            <span style={{
+              background: 'linear-gradient(135deg, #6BA3FF 0%, #A78BFA 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Never Sleeps.
+            </span>
           </h1>
 
-          <p className="font-body font-semibold mb-3" style={{ fontSize: 'clamp(16px, 2vw, 20px)', color: 'rgba(240,239,248,0.65)' }}>
+          {/* Subheadline */}
+          <p style={{
+            fontFamily: 'DM Sans', fontSize: 'clamp(16px, 2.5vw, 20px)',
+            fontWeight: 500, color: 'rgba(240,239,248,0.55)',
+            marginBottom: '12px', lineHeight: 1.6,
+          }}>
             Built on trust. Powered by technology. Guided by expertise.
           </p>
-          <p className="font-body mb-10 max-w-lg mx-auto" style={{ fontSize: '15px', color: 'rgba(240,239,248,0.38)', lineHeight: 1.7 }}>
-            Millions of transactions. Endless possibilities. One place to understand it all.
+          <p style={{
+            fontFamily: 'DM Sans', fontSize: '15px',
+            color: 'rgba(240,239,248,0.30)',
+            marginBottom: '52px', lineHeight: 1.7,
+            maxWidth: '480px', margin: '0 auto 52px',
+          }}>
+            Millions of transactions. Endless possibilities.<br />One place to understand it all.
           </p>
 
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-14">
+          {/* CTA Buttons */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '56px' }}>
             <button
               onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
-              className="btn-primary"
-              style={{ padding: '14px 32px', fontSize: '15px' }}>
-              <MessageCircle size={18} /> Start Live Chat
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                padding: '15px 32px', borderRadius: '12px',
+                background: 'linear-gradient(135deg, #4F8EF7 0%, #8B5CF6 100%)',
+                border: 'none', color: 'white', cursor: 'pointer',
+                fontFamily: 'Sora', fontWeight: 600, fontSize: '15px',
+                boxShadow: '0 8px 32px rgba(79,142,247,0.35)',
+                whiteSpace: 'nowrap',
+              }}>
+              <MessageCircle size={17} /> Start Live Chat
             </button>
-            <Link to="/articles" className="btn-secondary" style={{ padding: '14px 32px', fontSize: '15px' }}>
-              <BookOpen size={18} /> Browse Help Articles
+            <Link to="/articles" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '15px 32px', borderRadius: '12px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              color: 'rgba(240,239,248,0.75)', textDecoration: 'none',
+              fontFamily: 'Sora', fontWeight: 600, fontSize: '15px',
+              whiteSpace: 'nowrap',
+            }}>
+              <BookOpen size={17} /> Browse Help Articles
             </Link>
           </div>
 
-          {/* Search bar */}
-          <div style={{ position: 'relative', maxWidth: '600px', margin: '0 auto' }}>
-            <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(240,239,248,0.3)', pointerEvents: 'none' }} />
+          {/* Search */}
+          <div style={{ position: 'relative', maxWidth: '560px', margin: '0 auto' }}>
+            <Search size={17} style={{
+              position: 'absolute', left: '18px', top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'rgba(240,239,248,0.25)', pointerEvents: 'none',
+            }} />
             <input
               type="text"
               placeholder="Search your issue or topic..."
               value={searchQuery}
               onChange={e => handleSearch(e.target.value)}
-              className="search-input"
+              style={{
+                width: '100%', padding: '16px 20px 16px 50px',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.10)',
+                borderRadius: '12px', color: '#F0EFF8',
+                fontFamily: 'DM Sans', fontSize: '15px', outline: 'none',
+              }}
             />
             {searchResults.length > 0 && (
               <div style={{
                 position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0,
-                background: '#0D0C14', border: '1px solid rgba(255,255,255,0.1)',
+                background: '#0D0C14', border: '1px solid rgba(255,255,255,0.10)',
                 borderRadius: '12px', overflow: 'hidden', zIndex: 50,
-                boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+                boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
               }}>
                 {searchResults.map((r, i) => (
                   <Link
-                    key={i}
-                    to={r.href}
+                    key={i} to={r.href}
                     onClick={() => { setSearchQuery(''); setSearchResults([]) }}
-                    className="flex items-start gap-3 px-4 py-3 no-underline transition-colors"
-                    style={{ borderBottom: i < searchResults.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}
+                    style={{
+                      display: 'flex', alignItems: 'flex-start', gap: '12px',
+                      padding: '14px 16px', textDecoration: 'none',
+                      borderBottom: i < searchResults.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                    }}
                     onMouseEnter={e => (e.currentTarget.style.background = 'rgba(79,142,247,0.08)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
                     <span style={{
-                      fontSize: '11px', padding: '2px 8px', borderRadius: '4px',
+                      fontSize: '11px', padding: '2px 8px', borderRadius: '4px', flexShrink: 0, marginTop: '2px',
                       background: r.type === 'article' ? 'rgba(79,142,247,0.15)' : 'rgba(139,92,246,0.15)',
                       color: r.type === 'article' ? '#6BA3FF' : '#A78BFA',
-                      fontFamily: 'Sora', fontWeight: 600, marginTop: '2px', flexShrink: 0,
+                      fontFamily: 'Sora', fontWeight: 600,
                     }}>
                       {r.type === 'article' ? 'Article' : 'Issue'}
                     </span>
                     <div>
-                      <p className="font-heading font-semibold text-white text-sm">{r.title}</p>
-                      <p className="font-body text-xs mt-0.5" style={{ color: 'rgba(240,239,248,0.45)' }}>
+                      <p style={{ fontFamily: 'Sora', fontWeight: 600, color: 'white', fontSize: '14px', margin: 0 }}>{r.title}</p>
+                      <p style={{ fontFamily: 'DM Sans', fontSize: '12px', color: 'rgba(240,239,248,0.45)', margin: '2px 0 0' }}>
                         {r.description.slice(0, 70)}...
                       </p>
                     </div>
@@ -163,163 +240,364 @@ export default function Home() {
               </div>
             )}
           </div>
-        </div>
-      </section>
 
-      {/* ── TRUST BANNER ── */}
-      <div className="reveal" style={{
-        background: 'rgba(79,142,247,0.06)',
-        borderTop: '1px solid rgba(79,142,247,0.2)',
-        borderBottom: '1px solid rgba(79,142,247,0.2)',
-        borderLeft: '4px solid #4F8EF7',
-        padding: '18px 0',
-      }}>
-        <div className="max-w-7xl mx-auto px-6 flex items-center gap-4">
-          <Shield size={22} style={{ color: '#4F8EF7', flexShrink: 0 }} />
-          <p className="font-body font-semibold" style={{ fontSize: '15px', color: 'rgba(240,239,248,0.9)' }}>
-            We will <strong style={{ color: 'white' }}>NEVER</strong> ask for your private key, seed phrase, or wallet password — not in chat, not ever.
-          </p>
-        </div>
-      </div>
-
-      {/* ── HOW IT WORKS ── */}
-      <section style={{ padding: '100px 0' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="reveal text-center mb-16">
-            <span className="font-body font-bold text-xs tracking-widest uppercase mb-4 block"
-              style={{ color: '#4F8EF7', letterSpacing: '3px' }}>Simple Process</span>
-            <h2 className="font-heading font-bold text-white" style={{ fontSize: 'clamp(28px, 5vw, 48px)', letterSpacing: '-1px' }}>
-              How It Works
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Stats row */}
+          <div style={{
+            display: 'flex', justifyContent: 'center', flexWrap: 'wrap',
+            gap: '0', marginTop: '64px',
+            borderTop: '1px solid rgba(255,255,255,0.06)',
+            paddingTop: '40px',
+          }}>
             {[
-              { step: '01', icon: <Search size={28} />, title: 'Search Your Problem', desc: 'Describe your issue in the search bar above and find relevant guides instantly.' },
-              { step: '02', icon: <BookOpen size={28} />, title: 'Read the Guide', desc: 'Follow our step-by-step help articles written by crypto experts for any experience level.' },
-              { step: '03', icon: <MessageCircle size={28} />, title: 'Chat if Unresolved', desc: 'Connect with our live support team directly if you need personalized assistance.' },
-            ].map(({ step, icon, title, desc }, i) => (
-              <div key={step} className="card p-8 relative overflow-hidden"
-                style={{
-                  background: i === 1 ? 'linear-gradient(135deg, rgba(79,142,247,0.1), rgba(139,92,246,0.1))' : undefined,
-                  borderColor: i === 1 ? 'rgba(79,142,247,0.3)' : undefined,
-                }}>
-                <div className="absolute top-6 right-6 font-heading font-bold"
-                  style={{ fontSize: '56px', color: 'rgba(255,255,255,0.04)', letterSpacing: '-2px' }}>{step}</div>
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
-                  style={{ background: i === 1 ? 'linear-gradient(135deg, #4F8EF7, #8B5CF6)' : 'rgba(79,142,247,0.1)', color: i === 1 ? 'white' : '#4F8EF7' }}>
-                  {icon}
-                </div>
-                <p className="font-body font-bold text-xs tracking-widest uppercase mb-3" style={{ color: '#4F8EF7' }}>Step {step}</p>
-                <h3 className="font-heading font-bold text-white mb-3" style={{ fontSize: '18px' }}>{title}</h3>
-                <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(240,239,248,0.55)' }}>{desc}</p>
+              ['10,000+', 'Users Helped'],
+              ['24/7', 'Live Support'],
+              ['100+', 'Help Articles'],
+            ].map(([val, label], i) => (
+              <div key={label} style={{
+                textAlign: 'center', padding: '0 40px',
+                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+              }}>
+                <p style={{
+                  fontFamily: 'Sora', fontWeight: 800, fontSize: '32px',
+                  color: '#F0EFF8', letterSpacing: '-1px', lineHeight: 1, margin: 0,
+                }}>{val}</p>
+                <p style={{
+                  fontFamily: 'DM Sans', fontSize: '12px', letterSpacing: '2px',
+                  textTransform: 'uppercase', color: 'rgba(240,239,248,0.28)', margin: '6px 0 0',
+                }}>{label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── ARTICLES ── */}
-      <section style={{ padding: '0 0 100px' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="reveal flex items-end justify-between mb-12">
+      {/* ══════════════════════════════════
+          TRUST BANNER
+      ══════════════════════════════════ */}
+      <div style={{
+        background: 'rgba(79,142,247,0.06)',
+        borderTop: '1px solid rgba(79,142,247,0.15)',
+        borderBottom: '1px solid rgba(79,142,247,0.15)',
+        padding: '20px 0',
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <Shield size={20} style={{ color: '#4F8EF7', flexShrink: 0 }} />
+          <p style={{ fontFamily: 'DM Sans', fontWeight: 600, fontSize: '15px', color: 'rgba(240,239,248,0.85)', margin: 0 }}>
+            We will <strong style={{ color: 'white' }}>NEVER</strong> ask for your private key, seed phrase, or wallet password — not in chat, not ever.
+          </p>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════
+          HOW IT WORKS
+      ══════════════════════════════════ */}
+      <section style={{ padding: '120px 0', position: 'relative' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+
+          {/* Section header */}
+          <div style={{
+            display: 'flex', flexDirection: 'column' as const,
+            alignItems: 'flex-start', marginBottom: '60px',
+            paddingBottom: '40px', borderBottom: '1px solid rgba(255,255,255,0.06)',
+          }}>
+            <p style={{
+              fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px',
+              letterSpacing: '3px', textTransform: 'uppercase' as const,
+              color: '#4F8EF7', marginBottom: '16px',
+            }}>Simple Process</p>
+            <h2 style={{
+              fontFamily: 'Sora', fontWeight: 800,
+              fontSize: 'clamp(32px, 5vw, 56px)',
+              letterSpacing: '-2px', lineHeight: 1,
+              color: '#F0EFF8', margin: 0,
+            }}>How It Works</h2>
+          </div>
+
+          {/* Steps grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.06)' }}>
+            {[
+              { step: '01', icon: <Search size={26} />, title: 'Search Your Problem', desc: 'Describe your issue in the search bar and find relevant guides instantly.' },
+              { step: '02', icon: <BookOpen size={26} />, title: 'Read the Guide', desc: 'Follow step-by-step help articles written by crypto experts for any experience level.' },
+              { step: '03', icon: <MessageCircle size={26} />, title: 'Chat if Unresolved', desc: 'Connect with our live support team directly for personalized assistance.' },
+            ].map(({ step, icon, title, desc }, i) => (
+              <div key={step} style={{
+                padding: '48px 40px',
+                background: '#06050A',
+                position: 'relative' as const,
+              }}>
+                <div style={{
+                  position: 'absolute' as const, top: '32px', right: '32px',
+                  fontFamily: 'Sora', fontWeight: 800, fontSize: '72px',
+                  color: 'rgba(255,255,255,0.03)', letterSpacing: '-4px', lineHeight: 1,
+                }}>{step}</div>
+                <div style={{
+                  width: '52px', height: '52px', borderRadius: '14px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: '28px',
+                  background: i === 1
+                    ? 'linear-gradient(135deg, rgba(79,142,247,0.25), rgba(139,92,246,0.25))'
+                    : 'rgba(79,142,247,0.08)',
+                  border: i === 1 ? '1px solid rgba(79,142,247,0.3)' : '1px solid rgba(79,142,247,0.12)',
+                  color: '#4F8EF7',
+                }}>{icon}</div>
+                <p style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: '#4F8EF7', marginBottom: '12px' }}>Step {step}</p>
+                <h3 style={{ fontFamily: 'Sora', fontWeight: 700, fontSize: '20px', color: '#F0EFF8', marginBottom: '12px', letterSpacing: '-0.5px' }}>{title}</h3>
+                <p style={{ fontFamily: 'DM Sans', fontSize: '14px', color: 'rgba(240,239,248,0.45)', lineHeight: 1.75, margin: 0 }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════
+          BENTO FEATURES
+      ══════════════════════════════════ */}
+      <section style={{ padding: '0 0 120px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{
+            display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
+            marginBottom: '40px', paddingBottom: '40px',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
+            flexWrap: 'wrap' as const, gap: '16px',
+          }}>
             <div>
-              <span className="font-body font-bold text-xs tracking-widest uppercase mb-3 block"
-                style={{ color: '#4F8EF7', letterSpacing: '3px' }}>Knowledge Base</span>
-              <h2 className="font-heading font-bold text-white" style={{ fontSize: 'clamp(24px, 4vw, 40px)', letterSpacing: '-1px' }}>Help Articles</h2>
+              <p style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase' as const, color: '#8B5CF6', marginBottom: '12px' }}>Platform</p>
+              <h2 style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', color: '#F0EFF8', margin: 0, lineHeight: 1 }}>
+                Built for Performance
+              </h2>
             </div>
-            <Link to="/articles" className="btn-secondary hidden md:flex" style={{ padding: '10px 20px', fontSize: '13px' }}>
-              View All <ArrowRight size={15} />
+          </div>
+
+          {/* Bento grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+            {[
+              {
+                icon: <Lock size={22} />,
+                color: '#4F8EF7',
+                label: 'Security',
+                title: 'Your privacy,\nalways protected',
+                desc: 'We operate on a strict no-private-key policy. Your seed phrase and wallet credentials remain yours — always.',
+              },
+              {
+                icon: <Zap size={22} />,
+                color: '#8B5CF6',
+                label: 'Speed',
+                title: 'Fast, expert\nguidance',
+                desc: 'Get answers in minutes, not hours. Our team is trained on every major wallet, exchange, and blockchain.',
+              },
+              {
+                icon: <Globe size={22} />,
+                color: '#22C55E',
+                label: 'Coverage',
+                title: 'Every wallet.\nEvery chain.',
+                desc: 'From MetaMask to Trust Wallet, Binance to Bybit — we cover every platform you use.',
+              },
+            ].map(({ icon, color, label, title, desc }) => (
+              <div key={label} style={{
+                padding: '40px 36px',
+                background: '#0D0C14',
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderRadius: '20px',
+                position: 'relative' as const,
+                overflow: 'hidden',
+              }}>
+                {/* Glow */}
+                <div style={{
+                  position: 'absolute' as const, top: '-40px', right: '-40px',
+                  width: '180px', height: '180px', borderRadius: '50%',
+                  background: `radial-gradient(circle, ${color}14 0%, transparent 70%)`,
+                  pointerEvents: 'none',
+                }} />
+                <div style={{
+                  width: '44px', height: '44px', borderRadius: '12px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: `${color}12`, border: `1px solid ${color}25`,
+                  color, marginBottom: '24px',
+                }}>{icon}</div>
+                <p style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color, marginBottom: '12px' }}>{label}</p>
+                <h3 style={{
+                  fontFamily: 'Sora', fontWeight: 700, fontSize: '22px',
+                  color: '#F0EFF8', letterSpacing: '-0.5px', lineHeight: 1.25,
+                  marginBottom: '14px', whiteSpace: 'pre-line' as const,
+                }}>{title}</h3>
+                <p style={{ fontFamily: 'DM Sans', fontSize: '14px', color: 'rgba(240,239,248,0.45)', lineHeight: 1.75, margin: 0 }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════
+          ARTICLES
+      ══════════════════════════════════ */}
+      <section style={{ padding: '0 0 120px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{
+            display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
+            padding: '60px 0 48px', flexWrap: 'wrap' as const, gap: '16px',
+          }}>
+            <div>
+              <p style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase' as const, color: '#4F8EF7', marginBottom: '12px' }}>Knowledge Base</p>
+              <h2 style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', color: '#F0EFF8', margin: 0, lineHeight: 1 }}>Help Articles</h2>
+            </div>
+            <Link to="/articles" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px',
+              padding: '10px 20px', borderRadius: '10px',
+              background: 'transparent', border: '1px solid rgba(255,255,255,0.12)',
+              color: 'rgba(240,239,248,0.65)', textDecoration: 'none',
+              fontFamily: 'Sora', fontWeight: 600, fontSize: '13px',
+            }}>
+              View All <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
             {articles.slice(0, 6).map(article => (
-              <Link key={article.slug} to={`/articles/${article.slug}`} className="card p-6 no-underline block group">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-body font-bold text-xs px-3 py-1 rounded-full"
-                    style={{ background: `${categoryColors[article.category] || '#4F8EF7'}18`, color: categoryColors[article.category] || '#4F8EF7' }}>
-                    {article.category}
-                  </span>
-                  <span className="font-body text-xs" style={{ color: 'rgba(240,239,248,0.3)' }}>{article.readTime}</span>
+              <Link key={article.slug} to={`/articles/${article.slug}`} style={{
+                display: 'block', padding: '28px',
+                background: '#0D0C14',
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderRadius: '16px', textDecoration: 'none',
+                transition: 'border-color 0.2s',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(79,142,247,0.3)')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)')}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+                  <span style={{
+                    fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px',
+                    padding: '4px 10px', borderRadius: '100px',
+                    background: `${categoryColors[article.category] || '#4F8EF7'}15`,
+                    color: categoryColors[article.category] || '#4F8EF7',
+                  }}>{article.category}</span>
+                  <span style={{ fontFamily: 'DM Sans', fontSize: '12px', color: 'rgba(240,239,248,0.25)' }}>{article.readTime}</span>
                 </div>
-                <h3 className="font-heading font-bold text-white mb-3 group-hover:text-blue-400 transition-colors"
-                  style={{ fontSize: '16px', lineHeight: 1.4 }}>{article.title}</h3>
-                <p className="font-body text-sm mb-5" style={{ color: 'rgba(240,239,248,0.45)', lineHeight: 1.65 }}>{article.description}</p>
-                <span className="font-body font-semibold text-sm flex items-center gap-1" style={{ color: '#4F8EF7' }}>
-                  Read More <ArrowRight size={14} />
+                <h3 style={{ fontFamily: 'Sora', fontWeight: 700, fontSize: '16px', color: '#F0EFF8', marginBottom: '10px', lineHeight: 1.4 }}>{article.title}</h3>
+                <p style={{ fontFamily: 'DM Sans', fontSize: '13px', color: 'rgba(240,239,248,0.40)', lineHeight: 1.65, marginBottom: '20px' }}>{article.description}</p>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontFamily: 'DM Sans', fontWeight: 600, fontSize: '13px', color: '#4F8EF7' }}>
+                  Read More <ArrowRight size={13} />
                 </span>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-8 md:hidden">
-            <Link to="/articles" className="btn-secondary">View All Articles <ArrowRight size={15} /></Link>
-          </div>
         </div>
       </section>
 
-      {/* ── COMMON ISSUES ── */}
-      <section style={{ padding: '0 0 100px', background: 'rgba(13,12,20,0.5)' }}>
-        <div className="max-w-7xl mx-auto px-6 pt-16">
-          <div className="reveal text-center mb-12">
-            <span className="font-body font-bold text-xs tracking-widest uppercase mb-3 block"
-              style={{ color: '#8B5CF6', letterSpacing: '3px' }}>Troubleshooting</span>
-            <h2 className="font-heading font-bold text-white" style={{ fontSize: 'clamp(24px, 4vw, 40px)', letterSpacing: '-1px' }}>What's Your Issue?</h2>
+      {/* ══════════════════════════════════
+          ISSUES
+      ══════════════════════════════════ */}
+      <section style={{ padding: '80px 0 120px', background: '#0a0914' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ marginBottom: '48px' }}>
+            <p style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase' as const, color: '#8B5CF6', marginBottom: '12px' }}>Troubleshooting</p>
+            <h2 style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', color: '#F0EFF8', margin: 0, lineHeight: 1 }}>
+              What's Your Issue?
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '12px' }}>
             {issues.map(issue => (
-              <Link key={issue.slug} to={`/issues/${issue.slug}`} className="card p-6 no-underline flex items-start gap-4 group">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 text-xl"
-                  style={{ background: 'rgba(139,92,246,0.1)', color: '#8B5CF6' }}>
+              <Link key={issue.slug} to={`/issues/${issue.slug}`} style={{
+                display: 'flex', alignItems: 'center', gap: '16px',
+                padding: '20px 24px',
+                background: '#0D0C14',
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderRadius: '14px', textDecoration: 'none',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)')}>
+                <div style={{
+                  width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'rgba(139,92,246,0.10)', color: '#8B5CF6',
+                }}>
                   {issueIcons[issue.icon] || issue.icon}
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-heading font-bold text-white mb-1 group-hover:text-purple-400 transition-colors"
-                    style={{ fontSize: '15px' }}>{issue.title}</h3>
-                  <p className="font-body text-sm" style={{ color: 'rgba(240,239,248,0.45)' }}>{issue.description}</p>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h3 style={{ fontFamily: 'Sora', fontWeight: 600, fontSize: '14px', color: '#F0EFF8', margin: '0 0 4px' }}>{issue.title}</h3>
+                  <p style={{ fontFamily: 'DM Sans', fontSize: '12px', color: 'rgba(240,239,248,0.40)', margin: 0 }}>{issue.description}</p>
                 </div>
-                <ArrowRight size={16} style={{ color: 'rgba(240,239,248,0.25)', flexShrink: 0, marginTop: '4px' }} />
+                <ArrowRight size={15} style={{ color: 'rgba(240,239,248,0.20)', flexShrink: 0 }} />
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section style={{ padding: '100px 0' }}>
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="reveal text-center mb-12">
-            <span className="font-body font-bold text-xs tracking-widest uppercase mb-3 block"
-              style={{ color: '#4F8EF7', letterSpacing: '3px' }}>FAQs</span>
-            <h2 className="font-heading font-bold text-white" style={{ fontSize: 'clamp(24px, 4vw, 40px)', letterSpacing: '-1px' }}>
-              Frequently Asked Questions
+      {/* ══════════════════════════════════
+          FAQ
+      ══════════════════════════════════ */}
+      <section style={{ padding: '100px 0', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+            <p style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase' as const, color: '#4F8EF7', marginBottom: '12px' }}>FAQs</p>
+            <h2 style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', color: '#F0EFF8', margin: 0 }}>
+              Common Questions
             </h2>
           </div>
           <FAQAccordion />
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ padding: '0 0 100px' }}>
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="card p-16 text-center relative overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, rgba(79,142,247,0.08) 0%, rgba(139,92,246,0.08) 100%)', borderColor: 'rgba(79,142,247,0.2)' }}>
-            <CheckCircle size={40} style={{ color: '#4F8EF7', margin: '0 auto 20px' }} />
-            <h2 className="font-heading font-bold text-white mb-4"
-              style={{ fontSize: 'clamp(22px, 4vw, 36px)', letterSpacing: '-0.5px' }}>
-              Still need help?
-            </h2>
-            <p className="font-body mb-8" style={{ color: 'rgba(240,239,248,0.55)', fontSize: '16px' }}>
-              Our support team is available 24/7. Start a live chat and get expert guidance within minutes.
-            </p>
-            <button
-              onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
-              className="btn-primary"
-              style={{ padding: '14px 36px', fontSize: '15px', margin: '0 auto' }}>
-              <MessageCircle size={18} />
-              Start Live Chat Now
-            </button>
+      {/* ══════════════════════════════════
+          CTA
+      ══════════════════════════════════ */}
+      <section style={{ padding: '0 0 120px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{
+            padding: '80px 60px', borderRadius: '24px', textAlign: 'center',
+            background: 'linear-gradient(135deg, #0f0d1f 0%, #0a0914 100%)',
+            border: '1px solid rgba(139,92,246,0.20)',
+            position: 'relative' as const, overflow: 'hidden',
+          }}>
+            {/* Glow effects */}
+            <div style={{
+              position: 'absolute' as const, top: '-60px', left: '50%', transform: 'translateX(-50%)',
+              width: '400px', height: '200px', borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%)',
+              pointerEvents: 'none',
+            }} />
+            <div style={{ position: 'relative' as const, zIndex: 1 }}>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: '56px', height: '56px', borderRadius: '16px', marginBottom: '24px',
+                background: 'linear-gradient(135deg, rgba(79,142,247,0.2), rgba(139,92,246,0.2))',
+                border: '1px solid rgba(139,92,246,0.3)',
+              }}>
+                <CheckCircle size={26} style={{ color: '#8B5CF6' }} />
+              </div>
+              <h2 style={{
+                fontFamily: 'Sora', fontWeight: 800,
+                fontSize: 'clamp(28px, 5vw, 52px)',
+                letterSpacing: '-2px', color: '#F0EFF8',
+                marginBottom: '16px', lineHeight: 1.05,
+              }}>
+                Still need help?
+              </h2>
+              <p style={{
+                fontFamily: 'DM Sans', fontSize: '16px',
+                color: 'rgba(240,239,248,0.45)',
+                marginBottom: '40px', maxWidth: '420px',
+                margin: '0 auto 40px', lineHeight: 1.7,
+              }}>
+                Our support team is available 24/7. Get expert guidance within minutes.
+              </p>
+              <button
+                onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  padding: '16px 40px', borderRadius: '12px',
+                  background: 'linear-gradient(135deg, #4F8EF7 0%, #8B5CF6 100%)',
+                  border: 'none', color: 'white', cursor: 'pointer',
+                  fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
+                  boxShadow: '0 8px 32px rgba(79,142,247,0.3)',
+                }}>
+                <MessageCircle size={18} /> Start Live Chat Now
+              </button>
+            </div>
           </div>
         </div>
       </section>
+
     </div>
   )
 }
