@@ -3,22 +3,38 @@ import { Link } from 'react-router-dom'
 import {
   ArrowRight, ChevronDown, ChevronUp, Search,
   Shield, BookOpen, MessageCircle, AlertTriangle,
-  CheckCircle, Clock, XCircle, ArrowUpRight, Send, Lock, Zap, Globe
+  CheckCircle, Clock, XCircle, ArrowUpRight, Send, Zap, Globe, Lock
 } from 'lucide-react'
 import { articles, issues, faqs } from '../data/content'
 
+const WA = `https://wa.me/18632100688?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`
+
 function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
+  return (
     <div>
       {faqs.map((faq, i) => (
-        <div key={i} className="accordion-item">
-          <button className="accordion-btn" onClick={() => setOpen(open === i ? null : i)}>
+        <div key={i} style={{ borderBottom: '1px solid rgba(10,8,20,0.10)' }}>
+          <button
+            onClick={() => setOpen(open === i ? null : i)}
+            style={{
+              width: '100%', background: 'none', border: 'none',
+              color: '#0a0814', padding: '20px 0',
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              cursor: 'pointer', fontFamily: 'Sora', fontSize: '16px',
+              fontWeight: 500, textAlign: 'left' as const,
+            }}>
             <span>{faq.q}</span>
             {open === i
               ? <ChevronUp size={18} style={{ color: '#8B5CF6', flexShrink: 0 }} />
               : <ChevronDown size={18} style={{ color: 'rgba(0,0,0,0.3)', flexShrink: 0 }} />}
           </button>
-          <div className={`accordion-content ${open === i ? 'open' : ''}`}>{faq.a}</div>
+          {open === i && (
+            <p style={{
+              fontFamily: 'DM Sans', fontSize: '15px', lineHeight: 1.75,
+              color: 'rgba(10,8,20,0.55)', paddingBottom: '20px', margin: 0,
+            }}>{faq.a}</p>
+          )}
         </div>
       ))}
     </div>
@@ -44,9 +60,7 @@ export default function Home() {
   return (
     <div>
 
-      {/* ══════════════════════════════════
-          HERO — Dark
-      ══════════════════════════════════ */}
+      {/* ══ HERO — Exodus Purple ══ */}
       <section style={{
         minHeight: '100vh',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -54,23 +68,8 @@ export default function Home() {
         paddingTop: '130px', paddingBottom: '100px',
         background: 'linear-gradient(160deg, #1a0f6e 0%, #2d1b8e 35%, #4b2fbe 65%, #7c3aed 100%)',
       }}>
-        {/* Purple glow */}
-        <div style={{
-          position: 'absolute', top: '-20%', left: '50%', transform: 'translateX(-50%)',
-          width: '800px', height: '500px', borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(139,92,246,0.20) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        {/* Bottom fade */}
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: '200px',
-          background: 'linear-gradient(to bottom, transparent, #080612)',
-          pointerEvents: 'none',
-        }} />
-
         <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 24px', maxWidth: '820px', margin: '0 auto', width: '100%' }}>
 
-          {/* Headline */}
           <h1 style={{
             fontFamily: 'Sora', fontWeight: 800,
             fontSize: 'clamp(52px, 10vw, 100px)',
@@ -82,34 +81,31 @@ export default function Home() {
 
           <p style={{
             fontFamily: 'DM Sans', fontSize: 'clamp(16px, 2.5vw, 20px)',
-            fontWeight: 400, color: 'rgba(255,255,255,0.50)',
-            marginBottom: '48px', lineHeight: 1.65,
-            maxWidth: '480px', margin: '0 auto 48px',
+            fontWeight: 400, color: 'rgba(255,255,255,0.65)',
+            lineHeight: 1.65, maxWidth: '480px',
+            margin: '0 auto 48px',
           }}>
             Stuck on a withdrawal? Transaction pending forever? We've seen it all — and fixed it all.
           </p>
 
-          {/* CTAs */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '60px' }}>
-            <button
-              onClick={() => window.open('https://wa.me/18632100688?text=' + encodeURIComponent('Any issues on your wallet how can we be of help?'), '_blank')}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                padding: '16px 36px', borderRadius: '100px',
-                background: 'white', border: 'none',
-                color: '#080612', cursor: 'pointer',
-                fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
-                whiteSpace: 'nowrap' as const,
-                boxShadow: '0 4px 24px rgba(255,255,255,0.15)',
-              }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '72px' }}>
+            <a href={WA} target="_blank" rel="noopener noreferrer" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '16px 36px', borderRadius: '100px',
+              background: 'white', border: 'none',
+              color: '#1a0f6e', textDecoration: 'none',
+              fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
+              whiteSpace: 'nowrap' as const,
+              boxShadow: '0 4px 24px rgba(255,255,255,0.20)',
+            }}>
               <MessageCircle size={17} /> Start Live Chat
-            </button>
+            </a>
             <Link to="/articles" style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px',
               padding: '16px 36px', borderRadius: '100px',
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.15)',
-              color: 'rgba(255,255,255,0.80)', textDecoration: 'none',
+              background: 'rgba(255,255,255,0.12)',
+              border: '1px solid rgba(255,255,255,0.25)',
+              color: 'white', textDecoration: 'none',
               fontFamily: 'Sora', fontWeight: 600, fontSize: '15px',
               whiteSpace: 'nowrap' as const,
             }}>
@@ -117,34 +113,26 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Stats */}
           <div style={{
             display: 'flex', justifyContent: 'center', flexWrap: 'wrap',
-            marginTop: '72px', paddingTop: '40px',
-            borderTop: '1px solid rgba(255,255,255,0.07)',
+            paddingTop: '40px', borderTop: '1px solid rgba(255,255,255,0.15)',
           }}>
-            {[
-              ['10,000+', 'Users Helped'],
-              ['24/7', 'Live Support'],
-              ['100+', 'Help Articles'],
-            ].map(([val, label], i) => (
+            {[['10,000+', 'Users Helped'], ['24/7', 'Live Support'], ['100+', 'Help Articles']].map(([val, label], i) => (
               <div key={label} style={{
                 textAlign: 'center', padding: '0 40px',
-                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.15)' : 'none',
               }}>
                 <p style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: '34px', color: '#ffffff', letterSpacing: '-1.5px', lineHeight: 1, margin: 0 }}>{val}</p>
-                <p style={{ fontFamily: 'DM Sans', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.30)', margin: '8px 0 0' }}>{label}</p>
+                <p style={{ fontFamily: 'DM Sans', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.45)', margin: '8px 0 0' }}>{label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════
-          TRUST BANNER — Dark
-      ══════════════════════════════════ */}
+      {/* ══ TRUST BANNER — Dark Purple ══ */}
       <div style={{
-        background: 'rgba(139,92,246,0.08)',
+        background: '#13103a',
         borderTop: '1px solid rgba(139,92,246,0.20)',
         borderBottom: '1px solid rgba(139,92,246,0.20)',
         padding: '20px 24px',
@@ -157,16 +145,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════
-          HOW IT WORKS — White
-      ══════════════════════════════════ */}
+      {/* ══ HOW IT WORKS — White ══ */}
       <section style={{ padding: '100px 0', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
-
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <div style={{
               display: 'inline-block', padding: '6px 16px', borderRadius: '100px',
-              border: '1px solid rgba(139,92,246,0.25)', marginBottom: '20px',
+              border: '1px solid rgba(139,92,246,0.30)', marginBottom: '20px',
             }}>
               <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: '#8B5CF6' }}>Simple Process</span>
             </div>
@@ -177,21 +162,21 @@ export default function Home() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {[
-              { step: '01', icon: <Search size={28} style={{ color: '#8B5CF6' }} />, title: 'Describe your issue', desc: 'Tell us what\'s happening — pending withdrawal, failed transaction, wrong network. The more detail, the faster we help.' },
+              { step: '01', icon: <MessageCircle size={28} style={{ color: '#8B5CF6' }} />, title: 'Describe your issue', desc: 'Tell us what\'s happening — pending withdrawal, failed transaction, wrong network. The more detail, the faster we help.' },
               { step: '02', icon: <BookOpen size={28} style={{ color: '#8B5CF6' }} />, title: 'Follow the guide', desc: 'Step-by-step instructions written by crypto experts. Clear, direct, and built for every experience level.' },
-              { step: '03', icon: <MessageCircle size={28} style={{ color: '#8B5CF6' }} />, title: 'Chat if you\'re stuck', desc: 'Still need help? Our live support team is online 24/7. Real people, real answers, no bots.' },
+              { step: '03', icon: <Search size={28} style={{ color: '#8B5CF6' }} />, title: 'Chat if you\'re stuck', desc: 'Still need help? Our live support team is online 24/7. Real people, real answers, no bots.' },
             ].map(({ step, icon, title, desc }, i) => (
               <div key={step} style={{
                 padding: '40px 36px',
                 background: i === 1 ? '#0a0814' : '#f8f7ff',
                 borderRadius: '20px',
-                border: i === 1 ? 'none' : '1px solid rgba(139,92,246,0.10)',
+                border: i === 1 ? 'none' : '1px solid rgba(139,92,246,0.12)',
                 position: 'relative' as const,
               }}>
                 <div style={{
                   position: 'absolute' as const, top: '24px', right: '28px',
                   fontFamily: 'Sora', fontWeight: 800, fontSize: '64px',
-                  color: i === 1 ? 'rgba(255,255,255,0.04)' : 'rgba(139,92,246,0.07)',
+                  color: i === 1 ? 'rgba(255,255,255,0.04)' : 'rgba(139,92,246,0.08)',
                   letterSpacing: '-3px', lineHeight: 1,
                 }}>{step}</div>
                 <div style={{
@@ -200,34 +185,23 @@ export default function Home() {
                   background: i === 1 ? 'rgba(139,92,246,0.20)' : 'rgba(139,92,246,0.08)',
                   marginBottom: '24px',
                 }}>{icon}</div>
-                <h3 style={{
-                  fontFamily: 'Sora', fontWeight: 700, fontSize: '20px',
-                  color: i === 1 ? '#ffffff' : '#0a0814',
-                  marginBottom: '12px', letterSpacing: '-0.5px',
-                }}>{title}</h3>
-                <p style={{
-                  fontFamily: 'DM Sans', fontSize: '14px', lineHeight: 1.75,
-                  color: i === 1 ? 'rgba(255,255,255,0.45)' : 'rgba(10,8,20,0.50)',
-                  margin: 0,
-                }}>{desc}</p>
+                <h3 style={{ fontFamily: 'Sora', fontWeight: 700, fontSize: '20px', color: i === 1 ? '#ffffff' : '#0a0814', marginBottom: '12px', letterSpacing: '-0.5px' }}>{title}</h3>
+                <p style={{ fontFamily: 'DM Sans', fontSize: '14px', lineHeight: 1.75, color: i === 1 ? 'rgba(255,255,255,0.45)' : 'rgba(10,8,20,0.50)', margin: 0 }}>{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════
-          FEATURES — Dark
-      ══════════════════════════════════ */}
-      <section style={{ padding: '100px 0', background: '#080612' }}>
+      {/* ══ FEATURES — Dark Purple ══ */}
+      <section style={{ padding: '100px 0', background: '#0f0b2e' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
-
           <div style={{ marginBottom: '56px' }}>
             <div style={{
               display: 'inline-block', padding: '6px 16px', borderRadius: '100px',
-              border: '1px solid rgba(255,255,255,0.12)', marginBottom: '20px',
+              border: '1px solid rgba(255,255,255,0.15)', marginBottom: '20px',
             }}>
-              <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.50)' }}>Why Us</span>
+              <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.55)' }}>Why Us</span>
             </div>
             <h2 style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 56px)', letterSpacing: '-2px', color: '#ffffff', margin: 0, lineHeight: 1 }}>
               Built different.<br />By design.
@@ -242,48 +216,43 @@ export default function Home() {
             ].map(({ icon, color, title, desc }) => (
               <div key={title} style={{
                 padding: '40px 36px',
-                background: '#0f0b2e',
-                border: '1px solid rgba(255,255,255,0.06)',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
                 borderRadius: '20px',
                 position: 'relative' as const, overflow: 'hidden',
               }}>
                 <div style={{
                   position: 'absolute' as const, top: '-30px', right: '-30px',
                   width: '160px', height: '160px', borderRadius: '50%',
-                  background: `radial-gradient(circle, ${color}18 0%, transparent 70%)`,
+                  background: `radial-gradient(circle, ${color}20 0%, transparent 70%)`,
                   pointerEvents: 'none',
                 }} />
                 <div style={{
                   width: '48px', height: '48px', borderRadius: '14px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: `${color}15`, border: `1px solid ${color}25`,
+                  background: `${color}15`, border: `1px solid ${color}30`,
                   color, marginBottom: '24px',
                 }}>{icon}</div>
                 <h3 style={{ fontFamily: 'Sora', fontWeight: 700, fontSize: '20px', color: '#ffffff', marginBottom: '12px', letterSpacing: '-0.3px' }}>{title}</h3>
-                <p style={{ fontFamily: 'DM Sans', fontSize: '14px', color: 'rgba(255,255,255,0.40)', lineHeight: 1.75, margin: 0 }}>{desc}</p>
+                <p style={{ fontFamily: 'DM Sans', fontSize: '14px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, margin: 0 }}>{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════
-          ARTICLES — White
-      ══════════════════════════════════ */}
+      {/* ══ ARTICLES — White ══ */}
       <section style={{ padding: '100px 0', background: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
-
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '48px', flexWrap: 'wrap' as const, gap: '16px' }}>
             <div>
               <div style={{
                 display: 'inline-block', padding: '6px 16px', borderRadius: '100px',
-                border: '1px solid rgba(79,142,247,0.25)', marginBottom: '16px',
+                border: '1px solid rgba(79,142,247,0.30)', marginBottom: '16px',
               }}>
                 <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: '#4F8EF7' }}>Knowledge Base</span>
               </div>
-              <h2 style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', color: '#0a0814', margin: 0, lineHeight: 1 }}>
-                Help articles
-              </h2>
+              <h2 style={{ fontFamily: 'Sora', fontWeight: 800, fontSize: 'clamp(28px, 4vw, 48px)', letterSpacing: '-2px', color: '#0a0814', margin: 0, lineHeight: 1 }}>Help articles</h2>
             </div>
             <Link to="/articles" style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -291,9 +260,7 @@ export default function Home() {
               border: '1px solid rgba(10,8,20,0.15)',
               color: '#0a0814', textDecoration: 'none',
               fontFamily: 'Sora', fontWeight: 600, fontSize: '13px',
-            }}>
-              View All <ArrowRight size={14} />
-            </Link>
+            }}>View All <ArrowRight size={14} /></Link>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
@@ -303,10 +270,9 @@ export default function Home() {
                 background: '#f8f7ff',
                 border: '1px solid rgba(139,92,246,0.10)',
                 borderRadius: '16px', textDecoration: 'none',
-                transition: 'border-color 0.2s, transform 0.2s',
               }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(139,92,246,0.35)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(139,92,246,0.10)'; e.currentTarget.style.transform = 'translateY(0)' }}>
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.10)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
                   <span style={{
                     fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px',
@@ -327,15 +293,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════
-          ISSUES — Dark
-      ══════════════════════════════════ */}
-      <section style={{ padding: '100px 0', background: '#080612' }}>
+      {/* ══ ISSUES — Dark Purple ══ */}
+      <section style={{ padding: '100px 0', background: '#0f0b2e' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ marginBottom: '48px' }}>
             <div style={{
               display: 'inline-block', padding: '6px 16px', borderRadius: '100px',
-              border: '1px solid rgba(139,92,246,0.25)', marginBottom: '16px',
+              border: '1px solid rgba(139,92,246,0.30)', marginBottom: '16px',
             }}>
               <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: '#8B5CF6' }}>Troubleshooting</span>
             </div>
@@ -349,23 +313,22 @@ export default function Home() {
               <Link key={issue.slug} to={`/issues/${issue.slug}`} style={{
                 display: 'flex', alignItems: 'center', gap: '16px',
                 padding: '22px 24px',
-                background: '#0f0b2e',
-                border: '1px solid rgba(255,255,255,0.06)',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
                 borderRadius: '14px', textDecoration: 'none',
-                transition: 'border-color 0.2s',
               }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(139,92,246,0.30)')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)')}>
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.40)')}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.08)')}>
                 <div style={{
                   width: '44px', height: '44px', borderRadius: '12px', flexShrink: 0,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: 'rgba(139,92,246,0.10)', color: '#8B5CF6',
+                  background: 'rgba(139,92,246,0.12)', color: '#8B5CF6',
                 }}>
                   {issueIcons[issue.icon] || issue.icon}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <h3 style={{ fontFamily: 'Sora', fontWeight: 600, fontSize: '14px', color: '#ffffff', margin: '0 0 4px' }}>{issue.title}</h3>
-                  <p style={{ fontFamily: 'DM Sans', fontSize: '12px', color: 'rgba(255,255,255,0.35)', margin: 0 }}>{issue.description}</p>
+                  <p style={{ fontFamily: 'DM Sans', fontSize: '12px', color: 'rgba(255,255,255,0.40)', margin: 0 }}>{issue.description}</p>
                 </div>
                 <ArrowRight size={15} style={{ color: 'rgba(255,255,255,0.20)', flexShrink: 0 }} />
               </Link>
@@ -374,15 +337,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════
-          FAQ — White
-      ══════════════════════════════════ */}
+      {/* ══ FAQ — White ══ */}
       <section style={{ padding: '100px 0', background: '#ffffff' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
             <div style={{
               display: 'inline-block', padding: '6px 16px', borderRadius: '100px',
-              border: '1px solid rgba(139,92,246,0.25)', marginBottom: '16px',
+              border: '1px solid rgba(139,92,246,0.30)', marginBottom: '16px',
             }}>
               <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' as const, color: '#8B5CF6' }}>FAQs</span>
             </div>
@@ -394,60 +355,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════
-          CTA — Dark
-      ══════════════════════════════════ */}
-      <section style={{ padding: '100px 0', background: '#080612' }}>
+      {/* ══ CTA — Dark Purple ══ */}
+      <section style={{ padding: '100px 0', background: '#0f0b2e' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{
             padding: 'clamp(48px, 8vw, 96px) clamp(32px, 6vw, 80px)',
             borderRadius: '24px', textAlign: 'center',
-            background: 'linear-gradient(135deg, #13103a 0%, #0d0b2a 100%)',
-            border: '1px solid rgba(139,92,246,0.20)',
+            background: 'linear-gradient(135deg, #1a0f6e 0%, #2d1b8e 50%, #4b2fbe 100%)',
+            border: '1px solid rgba(139,92,246,0.25)',
             position: 'relative' as const, overflow: 'hidden',
           }}>
             <div style={{
               position: 'absolute' as const, top: '-80px', left: '50%', transform: 'translateX(-50%)',
               width: '500px', height: '300px', borderRadius: '50%',
-              background: 'radial-gradient(ellipse, rgba(139,92,246,0.20) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%)',
               pointerEvents: 'none',
             }} />
             <div style={{ position: 'relative' as const, zIndex: 1 }}>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                 width: '60px', height: '60px', borderRadius: '18px', marginBottom: '28px',
-                background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.25)',
+                background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.20)',
               }}>
-                <CheckCircle size={28} style={{ color: '#8B5CF6' }} />
+                <CheckCircle size={28} style={{ color: 'white' }} />
               </div>
               <h2 style={{
                 fontFamily: 'Sora', fontWeight: 800,
                 fontSize: 'clamp(32px, 5vw, 60px)',
                 letterSpacing: '-2px', color: '#ffffff',
                 marginBottom: '16px', lineHeight: 1,
-              }}>
-                Still need help?
-              </h2>
+              }}>Still need help?</h2>
               <p style={{
                 fontFamily: 'DM Sans', fontSize: '17px',
-                color: 'rgba(255,255,255,0.45)',
-                marginBottom: '40px',
+                color: 'rgba(255,255,255,0.60)',
                 maxWidth: '400px', margin: '0 auto 40px', lineHeight: 1.7,
               }}>
                 Our support team is online right now. Get expert guidance in minutes — not hours.
               </p>
-              <button
-                onClick={() => window.open('https://wa.me/18632100688?text=' + encodeURIComponent('Any issues on your wallet how can we be of help?'), '_blank')}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '8px',
-                  padding: '16px 40px', borderRadius: '100px',
-                  background: 'white', border: 'none',
-                  color: '#080612', cursor: 'pointer',
-                  fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
-                  boxShadow: '0 4px 24px rgba(255,255,255,0.12)',
-                }}>
+              <a href={WA} target="_blank" rel="noopener noreferrer" style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                padding: '16px 40px', borderRadius: '100px',
+                background: 'white', border: 'none',
+                color: '#1a0f6e', textDecoration: 'none',
+                fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
+                boxShadow: '0 4px 24px rgba(255,255,255,0.15)',
+              }}>
                 <MessageCircle size={18} /> Start Live Chat Now
-              </button>
+              </a>
             </div>
           </div>
         </div>
