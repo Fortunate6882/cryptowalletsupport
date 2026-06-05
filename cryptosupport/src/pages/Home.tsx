@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight, ChevronDown, ChevronUp, Search,
+  ArrowRight, ChevronDown, ChevronUp,
   Shield, BookOpen, MessageCircle, AlertTriangle,
   CheckCircle, Clock, XCircle, ArrowUpRight, Send, Lock, Zap, Globe
 } from 'lucide-react'
@@ -9,7 +9,6 @@ import { articles, issues, faqs } from '../data/content'
 
 function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
-  return (
     <div>
       {faqs.map((faq, i) => (
         <div key={i} className="accordion-item">
@@ -42,27 +41,6 @@ const issueIcons: Record<string, any> = {
 }
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<any[]>([])
-
-  const handleSearch = (q: string) => {
-    setSearchQuery(q)
-    if (!q.trim()) { setSearchResults([]); return }
-    const lower = q.toLowerCase()
-    const results = [
-      ...articles.filter(a =>
-        a.title.toLowerCase().includes(lower) ||
-        a.description.toLowerCase().includes(lower) ||
-        a.category.toLowerCase().includes(lower)
-      ).map(a => ({ ...a, type: 'article', href: `/articles/${a.slug}` })),
-      ...issues.filter(i =>
-        i.title.toLowerCase().includes(lower) ||
-        i.description.toLowerCase().includes(lower)
-      ).map(i => ({ ...i, type: 'issue', href: `/issues/${i.slug}` })),
-    ]
-    setSearchResults(results.slice(0, 6))
-  }
-
   return (
     <div>
 
@@ -92,19 +70,6 @@ export default function Home() {
 
         <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 24px', maxWidth: '820px', margin: '0 auto', width: '100%' }}>
 
-          {/* Trust badge */}
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '8px',
-            marginBottom: '36px', padding: '8px 18px', borderRadius: '100px',
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.12)',
-          }}>
-            <Lock size={12} style={{ color: 'rgba(255,255,255,0.5)' }} />
-            <span style={{ fontFamily: 'DM Sans', fontSize: '13px', fontWeight: 500, color: 'rgba(255,255,255,0.55)' }}>
-              Trusted by thousands worldwide
-            </span>
-          </div>
-
           {/* Headline */}
           <h1 style={{
             fontFamily: 'Sora', fontWeight: 800,
@@ -127,7 +92,7 @@ export default function Home() {
           {/* CTAs */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '60px' }}>
             <button
-              onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+              onClick={() => window.open('https://wa.me/18632100688?text=' + encodeURIComponent('Any issues on your wallet how can we be of help?'), '_blank')}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '8px',
                 padding: '16px 36px', borderRadius: '100px',
@@ -150,64 +115,6 @@ export default function Home() {
             }}>
               <BookOpen size={17} /> Browse Help Articles
             </Link>
-          </div>
-
-          {/* Search */}
-          <div style={{ position: 'relative', maxWidth: '560px', margin: '0 auto' }}>
-            <Search size={17} style={{
-              position: 'absolute', left: '20px', top: '50%',
-              transform: 'translateY(-50%)',
-              color: 'rgba(255,255,255,0.30)', pointerEvents: 'none',
-            }} />
-            <input
-              type="text"
-              placeholder="Search your issue or topic..."
-              value={searchQuery}
-              onChange={e => handleSearch(e.target.value)}
-              style={{
-                width: '100%', padding: '18px 20px 18px 52px',
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                borderRadius: '100px', color: '#ffffff',
-                fontFamily: 'DM Sans', fontSize: '15px', outline: 'none',
-              }}
-            />
-            {searchResults.length > 0 && (
-              <div style={{
-                position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0,
-                background: '#0D0C14', border: '1px solid rgba(255,255,255,0.10)',
-                borderRadius: '16px', overflow: 'hidden', zIndex: 50,
-                boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
-              }}>
-                {searchResults.map((r, i) => (
-                  <Link key={i} to={r.href}
-                    onClick={() => { setSearchQuery(''); setSearchResults([]) }}
-                    style={{
-                      display: 'flex', alignItems: 'flex-start', gap: '12px',
-                      padding: '14px 16px', textDecoration: 'none',
-                      borderBottom: i < searchResults.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(139,92,246,0.08)')}
-                    onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
-                    <span style={{
-                      fontSize: '11px', padding: '2px 8px', borderRadius: '4px',
-                      flexShrink: 0, marginTop: '2px',
-                      background: r.type === 'article' ? 'rgba(79,142,247,0.15)' : 'rgba(139,92,246,0.15)',
-                      color: r.type === 'article' ? '#6BA3FF' : '#A78BFA',
-                      fontFamily: 'Sora', fontWeight: 600,
-                    }}>
-                      {r.type === 'article' ? 'Article' : 'Issue'}
-                    </span>
-                    <div>
-                      <p style={{ fontFamily: 'Sora', fontWeight: 600, color: 'white', fontSize: '14px', margin: 0 }}>{r.title}</p>
-                      <p style={{ fontFamily: 'DM Sans', fontSize: '12px', color: 'rgba(240,239,248,0.45)', margin: '2px 0 0' }}>
-                        {r.description.slice(0, 70)}...
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Stats */}
@@ -530,7 +437,7 @@ export default function Home() {
                 Our support team is online right now. Get expert guidance in minutes — not hours.
               </p>
               <button
-                onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+                onClick={() => window.open('https://wa.me/18632100688?text=' + encodeURIComponent('Any issues on your wallet how can we be of help?'), '_blank')}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '8px',
                   padding: '16px 40px', borderRadius: '100px',
