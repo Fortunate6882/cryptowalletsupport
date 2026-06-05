@@ -3,48 +3,67 @@ import { Link } from 'react-router-dom'
 import { Shield, TrendingUp, TrendingDown } from 'lucide-react'
 
 const COINS = [
-  { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin' },
-  { id: 'ethereum', symbol: 'ETH', name: 'Ethereum' },
-  { id: 'binancecoin', symbol: 'BNB', name: 'BNB' },
-  { id: 'solana', symbol: 'SOL', name: 'Solana' },
-  { id: 'tether', symbol: 'USDT', name: 'Tether' },
-  { id: 'tron', symbol: 'TRX', name: 'TRON' },
-  { id: 'matic-network', symbol: 'MATIC', name: 'Polygon' },
+  { id: 'bitcoin',      symbol: 'BTC',  name: 'Bitcoin'  },
+  { id: 'ethereum',     symbol: 'ETH',  name: 'Ethereum' },
+  { id: 'binancecoin',  symbol: 'BNB',  name: 'BNB'      },
+  { id: 'solana',       symbol: 'SOL',  name: 'Solana'   },
+  { id: 'tether',       symbol: 'USDT', name: 'Tether'   },
+  { id: 'tron',         symbol: 'TRX',  name: 'TRON'     },
+  { id: 'matic-network',symbol: 'MATIC',name: 'Polygon'  },
 ]
+
+// Static fallback prices shown when API is unavailable
+const FALLBACK: Record<string, { price: number; change: number }> = {
+  BTC:  { price: 67420,  change: 1.24  },
+  ETH:  { price: 3510,   change: 0.85  },
+  BNB:  { price: 412,    change: -0.32 },
+  SOL:  { price: 178,    change: 2.10  },
+  USDT: { price: 1.00,   change: 0.01  },
+  TRX:  { price: 0.1245, change: -0.55 },
+  MATIC:{ price: 0.89,   change: 1.03  },
+}
 
 type CoinPrice = { price: number; change: number }
 
 export function TickerBar() {
-  const [prices, setPrices] = useState<Record<string, CoinPrice>>({})
+  const [prices, setPrices] = useState<Record<string, CoinPrice>>(FALLBACK)
 
   const fetchPrices = async () => {
     try {
       const ids = COINS.map(c => c.id).join(',')
       const res = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
+        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`,
+        { signal: AbortSignal.timeout(8000) }
       )
-      if (res.ok) {
-        const data = await res.json()
-        const parsed: Record<string, CoinPrice> = {}
-        COINS.forEach(c => {
-          if (data[c.id]) {
-            parsed[c.symbol] = { price: data[c.id].usd, change: data[c.id].usd_24h_change }
+      if (!res.ok) return // silently keep fallback on rate limit or error
+      const text = await res.text()
+      if (!text || !text.trim().startsWith('{')) return // guard against HTML error pages
+      const data = JSON.parse(text)
+      const parsed: Record<string, CoinPrice> = {}
+      COINS.forEach(c => {
+        if (data[c.id]?.usd !== undefined) {
+          parsed[c.symbol] = {
+            price: data[c.id].usd,
+            change: data[c.id].usd_24h_change ?? 0,
           }
-        })
-        setPrices(parsed)
-      }
-    } catch {}
+        }
+      })
+      if (Object.keys(parsed).length > 0) setPrices(parsed)
+    } catch {
+      // keep showing fallback or last known prices — never crash
+    }
   }
 
   useEffect(() => {
-    fetchPrices()
-    const interval = setInterval(fetchPrices, 30000)
-    return () => clearInterval(interval)
+    // Small delay so page renders first, then we try to fetch
+    const init = setTimeout(fetchPrices, 2000)
+    const interval = setInterval(fetchPrices, 60000)
+    return () => { clearTimeout(init); clearInterval(interval) }
   }, [])
 
   const formatPrice = (p: number) => {
     if (p >= 1000) return `$${p.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
-    if (p >= 1) return `$${p.toFixed(2)}`
+    if (p >= 1)    return `$${p.toFixed(2)}`
     return `$${p.toFixed(4)}`
   }
 
@@ -59,7 +78,8 @@ export function TickerBar() {
           {data ? formatPrice(data.price) : '—'}
         </span>
         {data && (
-          <span className="font-body text-xs flex items-center gap-0.5" style={{ color: isUp ? '#22C55E' : '#EF4444' }}>
+          <span className="font-body text-xs flex items-center gap-0.5"
+            style={{ color: isUp ? '#22C55E' : '#EF4444' }}>
             {isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
             {Math.abs(change).toFixed(2)}%
           </span>
@@ -84,6 +104,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12"
           style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+
           {/* Col 1 */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
