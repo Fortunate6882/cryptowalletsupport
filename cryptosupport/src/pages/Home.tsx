@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import { articles, issues, faqs } from '../data/content'
 
-const WA = `https://wa.me/18632100688?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`
+const WA = `https://wa.me/13074493773?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`
 
 function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
