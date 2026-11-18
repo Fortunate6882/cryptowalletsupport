@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
@@ -6,8 +7,8 @@ import {
   CheckCircle, Clock, XCircle, ArrowUpRight, Send, Zap, Globe, Lock
 } from 'lucide-react'
 import { articles, issues, faqs } from '../data/content'
+import { openChatwoot } from '../lib/chatwoot'
 
-const WA = `https://wa.me/13074493773?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`
 
 function FAQAccordion() {
   const [open, setOpen] = useState<number | null>(null)
@@ -89,17 +90,17 @@ export default function Home() {
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '72px' }}>
-            <a href={WA} target="_blank" rel="noopener noreferrer" style={{
+            <button type="button" onClick={openChatwoot} style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px',
               padding: '16px 36px', borderRadius: '100px',
               background: 'white', border: 'none',
-              color: '#1a0f6e', textDecoration: 'none',
+              color: '#1a0f6e', cursor: 'pointer',
               fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
               whiteSpace: 'nowrap' as const,
               boxShadow: '0 4px 24px rgba(255,255,255,0.20)',
             }}>
               <MessageCircle size={17} /> Start Live Chat
-            </a>
+            </button>
             <Link to="/articles" style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px',
               padding: '16px 36px', borderRadius: '100px',
@@ -392,16 +393,16 @@ export default function Home() {
               }}>
                 Our support team is online right now. Get expert guidance in minutes — not hours.
               </p>
-              <a href={WA} target="_blank" rel="noopener noreferrer" style={{
+              <button type="button" onClick={openChatwoot} style={{
                 display: 'inline-flex', alignItems: 'center', gap: '8px',
                 padding: '16px 40px', borderRadius: '100px',
                 background: 'white', border: 'none',
-                color: '#1a0f6e', textDecoration: 'none',
+                color: '#1a0f6e', cursor: 'pointer',
                 fontFamily: 'Sora', fontWeight: 700, fontSize: '15px',
                 boxShadow: '0 4px 24px rgba(255,255,255,0.15)',
               }}>
                 <MessageCircle size={18} /> Start Live Chat Now
-              </a>
+              </button>
             </div>
           </div>
         </div>
