@@ -1,5 +1,7 @@
+
 import { Link } from 'react-router-dom'
 import { Home, Search, Shield } from 'lucide-react'
+import { openChatwoot } from '../lib/chatwoot'
 
 export function Privacy() {
   const sections = [
@@ -17,7 +19,7 @@ export function Privacy() {
     },
     {
       title: "Third Parties",
-      content: "We do not sell, rent, or share your personal information with any third parties for commercial purposes. Our live chat service (JivoChat) processes session data under their own privacy policy. We use basic analytics tools that do not collect personally identifiable information. No blockchain or wallet data you share with us is transmitted to any external party."
+      content: "We do not sell or rent your personal information. Our live chat service is provided through Chatwoot, which processes information submitted through the chat widget in accordance with its privacy policy. Information you choose to share in a chat may be processed by Chatwoot to provide the support service. We use basic analytics tools as described in this policy."
     },
     {
       title: "Cookies",
@@ -101,7 +103,7 @@ export function About() {
         <div className="card p-8 text-center" style={{ background: 'rgba(79,142,247,0.06)', borderColor: 'rgba(79,142,247,0.2)' }}>
           <p className="font-heading font-bold text-white text-lg mb-2">Need help right now?</p>
           <p className="font-body text-sm mb-6" style={{ color: 'rgba(240,239,248,0.45)' }}>Our support team is available 24/7 via live chat.</p>
-          <button onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+          <button onClick={openChatwoot}
             className="btn-primary" style={{ padding: '12px 28px', margin: '0 auto' }}>
             Start Live Chat
           </button>
