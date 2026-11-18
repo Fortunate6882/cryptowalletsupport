@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,6 +43,29 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Chatwoot website live-chat widget -->
+    <script>
+      window.chatwootSettings = {
+        position: "right",
+        type: "standard",
+        launcherTitle: ""
+      };
+
+      (function (d, t) {
+        var BASE_URL = "https://app.chatwoot.com";
+        var g = d.createElement(t);
+        var s = d.getElementsByTagName(t)[0];
+        g.src = BASE_URL + "/packs/js/sdk.js";
+        g.async = true;
+        s.parentNode.insertBefore(g, s);
+        g.onload = function () {
+          window.chatwootSDK.run({
+            websiteToken: "HKJZ3FdwmcMPJ4ksntGhcGQ2",
+            baseUrl: BASE_URL
+          });
+        };
+      })(document, "script");
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
