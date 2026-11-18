@@ -1,6 +1,8 @@
+
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import { openChatwoot } from '../lib/chatwoot'
 
 const EthLogo = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,10 +92,9 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex">
-            <a
-              href={`https://wa.me/18632100688?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={openChatwoot}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '6px',
                 padding: '10px 22px', borderRadius: '100px',
@@ -103,7 +104,7 @@ export default function Navbar() {
                 whiteSpace: 'nowrap' as const,
               }}>
               Start Live Chat
-            </a>
+            </button>
           </div>
 
           {/* Mobile hamburger */}
@@ -137,11 +138,12 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          <a
-            href={`https://wa.me/18632100688?text=${encodeURIComponent('Any issues on your wallet how can we be of help?')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false)
+              openChatwoot()
+            }}
             style={{
               width: '100%', padding: '16px', borderRadius: '100px',
               background: 'white', border: 'none',
@@ -150,7 +152,7 @@ export default function Navbar() {
               marginTop: '24px', display: 'block', textAlign: 'center' as const,
             }}>
             Start Live Chat
-          </a>
+          </button>
         </div>
       </div>
     </>
