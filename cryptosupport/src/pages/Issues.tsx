@@ -1,7 +1,9 @@
+
 import { Link, useParams, Navigate } from 'react-router-dom'
 import { ArrowRight, ArrowLeft, MessageCircle, AlertTriangle, Clock, XCircle, Send } from 'lucide-react'
 import { useState } from 'react'
 import { issues } from '../data/content'
+import { openChatwoot } from '../lib/chatwoot'
 
 const iconMap: Record<string, any> = {
   '⏳': <Clock size={28} />,
@@ -51,7 +53,7 @@ export function Issues() {
         <div className="card p-8 mt-12 text-center" style={{ background: 'rgba(139,92,246,0.06)', borderColor: 'rgba(139,92,246,0.2)' }}>
           <p className="font-heading font-bold text-white mb-2">Don't see your issue?</p>
           <p className="font-body text-sm mb-6" style={{ color: 'rgba(240,239,248,0.45)' }}>Our live support team can help with any crypto issue not covered here.</p>
-          <button onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+          <button onClick={openChatwoot}
             className="btn-primary" style={{ padding: '12px 28px', margin: '0 auto' }}>
             <MessageCircle size={16} /> Start Live Chat
           </button>
@@ -130,7 +132,7 @@ export function IssueDetail() {
             <p className="font-heading font-bold text-white text-lg mb-1">Issue not resolved?</p>
             <p className="font-body text-sm" style={{ color: 'rgba(240,239,248,0.45)' }}>Our support team handles this specific issue daily. Start a live chat for immediate help.</p>
           </div>
-          <button onClick={() => { if ((window as any).jivo_api) (window as any).jivo_api.open() }}
+          <button onClick={openChatwoot}
             className="btn-primary flex-shrink-0" style={{ padding: '12px 24px' }}>
             <MessageCircle size={16} /> Start Live Chat
           </button>
